@@ -74,7 +74,7 @@ OPTIONS
 BUGS
        Please     report     all     bugs     to     the     issue    tracker:
        https://bugs.chromium.org/p/webp
-       Patches welcome! See this  page  to  get  started:  http://www.webmpro-
+       Patches welcome! See this page  to  get  started:  https://www.webmpro-
        ject.org/code/contribute/submitting-patches/
 
 
@@ -95,9 +95,9 @@ AUTHORS
 
 SEE ALSO
        dwebp(1)
-       Please refer to http://developers.google.com/speed/webp/ for additional
-       information.
+       Please  refer  to  https://developers.google.com/speed/webp/  for addi-
+       tional information.
 
 
 
-                                 June 5, 2019                         VWEBP(1)
+                               November 17, 2021                      VWEBP(1)

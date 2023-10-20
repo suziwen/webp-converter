@@ -1,5 +1,5 @@
 <!-- Creator     : groff version 1.22.4 -->
-<!-- CreationDate: Thu Dec 26 17:01:13 2019 -->
+<!-- CreationDate: Wed Sep 13 22:32:08 2023 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -49,7 +49,8 @@ images.</p>
 
 
 <p style="margin-left:11%; margin-top: 1em"><b>img2webp</b>
-[file_level_options] [files] [per_frame_options...] <b><br>
+[file_options] [[frame_options] frame_file]... [-o
+webp_file] <b><br>
 img2webp argument_file_name</b></p>
 
 <h2>DESCRIPTION
@@ -66,8 +67,8 @@ compresses a sequence of images using the animated WebP
 format. Input images can either be PNG, JPEG, TIFF or WebP.
 If a single file name (not starting with the character
 &rsquo;-&rsquo;) is supplied as the argument, the command
-line argument are actually tokenized from this file. This
-allows for easy scripting or using large number of
+line arguments are actually tokenized from this file. This
+allows for easy scripting or using a large number of
 arguments.</p>
 
 <h2>FILE-LEVEL OPTIONS
@@ -87,9 +88,9 @@ WebP file.</p>
 
 <p style="margin-left:22%;">Encode images to achieve
 smallest size. This disables key frame insertion and picks
-the parameters resulting in smallest output for each frame.
-It uses lossless compression by default, but can be combined
-with -q, -m, -lossy or -mixed options.</p>
+the parameters resulting in the smallest output for each
+frame. It uses lossless compression by default, but can be
+combined with -q, -m, -lossy or -mixed options.</p>
 
 <p style="margin-left:11%;"><b>-kmin</b> <i>int</i> <b><br>
 -kmax</b> <i>int</i></p>
@@ -103,6 +104,25 @@ so that this criteria is satisfied. <b><br>
 the image by picking either lossy or lossless compression
 for each frame heuristically. This global option disables
 the local option <b>-lossy</b> and <b>-lossless</b> .</p>
+
+<p style="margin-left:11%;"><b>-near_lossless</b>
+<i>int</i></p>
+
+<p style="margin-left:22%;">Specify the level of
+near-lossless image preprocessing. This option adjusts pixel
+values to help compressibility, but has minimal impact on
+the visual quality. It triggers lossless compression mode
+automatically. The range is 0 (maximum preprocessing) to 100
+(no preprocessing, the default). The typical value is around
+60. Note that lossy with <b>-q 100</b> can at times yield
+better results.</p>
+
+<p style="margin-left:11%;"><b>-sharp_yuv</b></p>
+
+<p style="margin-left:22%;">Use more accurate and sharper
+RGB-&gt;YUV conversion if needed. Note that this process is
+slower than the default &rsquo;fast&rsquo; RGB-&gt;YUV
+conversion.</p>
 
 <p style="margin-left:11%;"><b>-loop</b> <i>int</i></p>
 
@@ -209,7 +229,7 @@ compressed file size and quality. Possible values range from
 all bugs to the issue tracker:
 https://bugs.chromium.org/p/webp <br>
 Patches welcome! See this page to get started:
-http://www.webmproject.org/code/contribute/submitting-patches/</p>
+https://www.webmproject.org/code/contribute/submitting-patches/</p>
 
 <h2>AUTHORS
 <a name="AUTHORS"></a>
@@ -235,8 +255,8 @@ page was written by Pascal Massimino
 
 <p style="margin-left:11%; margin-top: 1em"><b>webpmux</b>(1),
 <b>gif2webp</b>(1) <br>
-Please refer to http://developers.google.com/speed/webp/ for
-additional information.</p>
+Please refer to https://developers.google.com/speed/webp/
+for additional information.</p>
 <hr>
 </body>
 </html>

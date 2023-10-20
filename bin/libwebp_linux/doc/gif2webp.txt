@@ -61,7 +61,7 @@ OPTIONS
 
        -min_size
               Encode  image  to achieve smallest size. This disables key frame
-              insertion and picks the dispose  method  resulting  in  smallest
+              insertion and picks the dispose method resulting in the smallest
               output  for each frame. It uses lossless compression by default,
               but can be combined with -q, -m, -lossy or -mixed options.
 
@@ -120,7 +120,7 @@ OPTIONS
 BUGS
        Please    report     all     bugs     to     the     issue     tracker:
        https://bugs.chromium.org/p/webp
-       Patches  welcome!  See  this  page  to get started: http://www.webmpro-
+       Patches  welcome!  See  this  page to get started: https://www.webmpro-
        ject.org/code/contribute/submitting-patches/
 
 
@@ -144,9 +144,9 @@ AUTHORS
 
 SEE ALSO
        cwebp(1), dwebp(1), webpmux(1)
-       Please refer to http://developers.google.com/speed/webp/ for additional
-       information.
+       Please refer  to  https://developers.google.com/speed/webp/  for  addi-
+       tional information.
 
 
 
-                               January 25, 2018                    GIF2WEBP(1)
+                               November 17, 2021                   GIF2WEBP(1)

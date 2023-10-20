@@ -6,7 +6,7 @@ NAME
        img2webp - create animated WebP file from a sequence of input images.
 
 SYNOPSIS
-       img2webp [file_level_options] [files] [per_frame_options...]
+       img2webp [file_options] [[frame_options] frame_file]... [-o webp_file]
        img2webp argument_file_name
 
 DESCRIPTION
@@ -15,8 +15,8 @@ DESCRIPTION
        img2webp  compresses  a sequence of images using the animated WebP for-
        mat.  Input images can either be PNG, JPEG, TIFF or WebP.  If a  single
        file  name (not starting with the character '-') is supplied as the ar-
-       gument, the command line argument  are  actually  tokenized  from  this
-       file.   This  allows  for easy scripting or using large number of argu-
+       gument, the command line arguments are  actually  tokenized  from  this
+       file.   This allows for easy scripting or using a large number of argu-
        ments.
 
 FILE-LEVEL OPTIONS
@@ -28,9 +28,9 @@ FILE-LEVEL OPTIONS
 
        -min_size
               Encode  images to achieve smallest size. This disables key frame
-              insertion and picks the parameters resulting in smallest  output
-              for each frame. It uses lossless compression by default, but can
-              be combined with -q, -m, -lossy or -mixed options.
+              insertion and picks the parameters  resulting  in  the  smallest
+              output  for each frame. It uses lossless compression by default,
+              but can be combined with -q, -m, -lossy or -mixed options.
 
        -kmin int
 
@@ -43,6 +43,20 @@ FILE-LEVEL OPTIONS
               by picking either lossy or lossless compression for  each  frame
               heuristically.  This  global  option  disables  the local option
               -lossy and -lossless .
+
+       -near_lossless int
+              Specify the level of near-lossless image preprocessing. This op-
+              tion adjusts pixel values to help compressibility, but has mini-
+              mal impact on the visual quality. It triggers lossless  compres-
+              sion  mode automatically. The range is 0 (maximum preprocessing)
+              to 100 (no preprocessing, the default).  The  typical  value  is
+              around 60. Note that lossy with -q 100 can at times yield better
+              results.
+
+       -sharp_yuv
+              Use more accurate and sharper  RGB->YUV  conversion  if  needed.
+              Note  that  this  process  is  slower  than  the  default 'fast'
+              RGB->YUV conversion.
 
        -loop int
               Specifies the number of times the animation should  loop.  Using
@@ -85,7 +99,7 @@ EXAMPLE
 BUGS
        Please    report     all     bugs     to     the     issue     tracker:
        https://bugs.chromium.org/p/webp
-       Patches  welcome!  See  this  page  to get started: http://www.webmpro-
+       Patches  welcome!  See  this  page to get started: https://www.webmpro-
        ject.org/code/contribute/submitting-patches/
 
 
@@ -100,9 +114,9 @@ AUTHORS
 
 SEE ALSO
        webpmux(1), gif2webp(1)
-       Please refer to http://developers.google.com/speed/webp/ for additional
-       information.
+       Please refer  to  https://developers.google.com/speed/webp/  for  addi-
+       tional information.
 
 
 
-                                 April 3, 2018                     IMG2WEBP(1)
+                                March 17, 2023                     IMG2WEBP(1)

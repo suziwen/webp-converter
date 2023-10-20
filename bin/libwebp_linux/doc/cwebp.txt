@@ -12,19 +12,20 @@ DESCRIPTION
        This manual page documents the cwebp command.
 
        cwebp  compresses  an image using the WebP format.  Input format can be
-       either PNG, JPEG, TIFF, WebP or raw Y'CbCr samples.
+       either PNG, JPEG, TIFF, WebP or raw Y'CbCr samples.  Note: Animated PNG
+       and WebP files are not supported.
 
 OPTIONS
        The basic options are:
 
        -o string
               Specify the name of the output WebP file. If omitted, cwebp will
-              perform  compression  but  only report statistics.  Using "-" as
+              perform compression but only report statistics.   Using  "-"  as
               output name will direct output to 'stdout'.
 
        -- string
-              Explicitly specify the input file. This option is useful if  the
-              input  file starts with a '-' for instance. This option must ap-
+              Explicitly  specify the input file. This option is useful if the
+              input file starts with a '-' for instance. This option must  ap-
               pear last.  Any other options afterward will be ignored.
 
        -h, -help
@@ -37,70 +38,71 @@ OPTIONS
               Print the version number (as major.minor.revision) and exit.
 
        -lossless
-              Encode the image without any loss. For images with fully  trans-
+              Encode  the image without any loss. For images with fully trans-
               parent area, the invisible pixel values (R/G/B or Y/U/V) will be
               preserved only if the -exact option is used.
 
        -near_lossless int
               Specify the level of near-lossless image preprocessing. This op-
               tion adjusts pixel values to help compressibility, but has mini-
-              mal impact on the visual quality. It triggers lossless  compres-
-              sion  mode automatically. The range is 0 (maximum preprocessing)
-              to 100 (no preprocessing, the default).  The  typical  value  is
+              mal  impact on the visual quality. It triggers lossless compres-
+              sion mode automatically. The range is 0 (maximum  preprocessing)
+              to  100  (no  preprocessing,  the default). The typical value is
               around 60. Note that lossy with -q 100 can at times yield better
               results.
 
        -q float
-              Specify the compression factor for RGB channels  between  0  and
+              Specify  the  compression  factor for RGB channels between 0 and
               100. The default is 75.
-              In  case of lossy compression (default), a small factor produces
-              a smaller file with lower quality. Best quality is  achieved  by
+              In case of lossy compression (default), a small factor  produces
+              a  smaller  file with lower quality. Best quality is achieved by
               using a value of 100.
-              In  case of lossless compression (specified by the -lossless op-
+              In case of lossless compression (specified by the -lossless  op-
               tion), a small factor enables faster compression speed, but pro-
               duces a larger file.  Maximum compression is achieved by using a
               value of 100.
 
        -z int Switch on lossless compression mode with the specified level be-
               tween 0 and 9, with level 0 being the fastest, 9 being the slow-
-              est. Fast mode produces larger file size  than  slower  ones.  A
-              good  default  is  -z 6.  This option is actually a shortcut for
-              some predefined settings for quality and method. If  options  -q
-              or  -m are subsequently used, they will invalidate the effect of
+              est.  Fast  mode  produces  larger file size than slower ones. A
+              good default is -z 6.  This option is actually  a  shortcut  for
+              some  predefined  settings for quality and method. If options -q
+              or -m are subsequently used, they will invalidate the effect  of
               this option.
 
        -alpha_q int
-              Specify the compression factor for alpha compression  between  0
-              and  100.   Lossless  compression  of  alpha is achieved using a
-              value of 100, while the lower values result in a lossy  compres-
+              Specify  the  compression factor for alpha compression between 0
+              and 100.  Lossless compression of  alpha  is  achieved  using  a
+              value  of 100, while the lower values result in a lossy compres-
               sion. The default is 100.
 
        -preset string
-              Specify  a  set  of  pre-defined parameters to suit a particular
-              type of source material. Possible values are:   default,  photo,
+              Specify a set of pre-defined parameters  to  suit  a  particular
+              type  of  source material. Possible values are:  default, photo,
               picture, drawing, icon, text. Since -preset overwrites the other
-              parameters' values (except  the  -q  one),  this  option  should
+              parameters'  values  (except  the  -q  one),  this option should
               preferably appear first in the order of the arguments.
 
-       -m int Specify  the  compression method to use. This parameter controls
-              the trade off between encoding speed  and  the  compressed  file
-              size  and  quality.   Possible values range from 0 to 6. Default
+       -m int Specify the compression method to use. This  parameter  controls
+              the  trade  off  between  encoding speed and the compressed file
+              size and quality.  Possible values range from 0  to  6.  Default
               value is 4.  When higher values are used, the encoder will spend
-              more  time  inspecting additional encoding possibilities and de-
+              more time inspecting additional encoding possibilities  and  de-
               cide on the quality gain.  Lower value can result in faster pro-
-              cessing  time  at the expense of larger file size and lower com-
+              cessing time at the expense of larger file size and  lower  com-
               pression quality.
+
+       -crop x_position y_position width height
+              Crop  the  source to a rectangle with top-left corner at coordi-
+              nates (x_position, y_position) and size width  x  height.   This
+              cropping  area must be fully contained within the source rectan-
+              gle.  Note: the cropping is applied before any scaling.
 
        -resize width height
               Resize the source to a rectangle with size width x  height.   If
               either  (but  not  both) of the width or height parameters is 0,
-              the value will be calculated preserving the aspect-ratio.
-
-       -crop x_position y_position width height
-              Crop the source to a rectangle with top-left corner  at  coordi-
-              nates  (x_position,  y_position)  and size width x height.  This
-              cropping area must be fully contained within the source  rectan-
-              gle.
+              the value will be calculated preserving the aspect-ratio.  Note:
+              scaling is applied after cropping.
 
        -mt    Use multi-threading for encoding, if possible.
 
@@ -138,6 +140,13 @@ OPTIONS
               by  options  -size  or -psnr. Maximum value is 10, default is 1.
               If options -size or -psnr were used, but -pass wasn't specified,
               a default value of '6' passes will be used.
+
+       -qrange int int
+              Specifies  the permissible interval for the quality factor. This
+              is particularly useful when using multi-pass (-size or -psnr op-
+              tions).   Default  is  0  100.  If the quality factor is outside
+              this range, it will be clamped.  If the minimum  value  must  be
+              less or equal to the maximum one.
 
        -af    Turns  auto-filter on. This algorithm will spend additional time
               optimizing the filtering strength to reach a well-balanced qual-
@@ -224,7 +233,7 @@ OPTIONS
 
        -print_ssim
               Compute  and  report average SSIM (structural similarity metric,
-              see http://en.wikipedia.org/wiki/SSIM for additional details).
+              see https://en.wikipedia.org/wiki/SSIM for additional details).
 
        -print_lsim
               Compute and report local similarity metric (sum of lowest  error
@@ -301,7 +310,7 @@ OPTIONS
 BUGS
        Please    report     all     bugs     to     the     issue     tracker:
        https://bugs.chromium.org/p/webp
-       Patches  welcome!  See  this  page  to get started: http://www.webmpro-
+       Patches  welcome!  See  this  page to get started: https://www.webmpro-
        ject.org/code/contribute/submitting-patches/
 
 
@@ -323,9 +332,9 @@ AUTHORS
 
 SEE ALSO
        dwebp(1), gif2webp(1)
-       Please refer to http://developers.google.com/speed/webp/ for additional
-       information.
+       Please refer  to  https://developers.google.com/speed/webp/  for  addi-
+       tional information.
 
 
 
-                               January 11, 2019                       CWEBP(1)
+                                March 17, 2022                        CWEBP(1)

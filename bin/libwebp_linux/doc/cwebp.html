@@ -1,5 +1,5 @@
 <!-- Creator     : groff version 1.22.4 -->
-<!-- CreationDate: Thu Dec 26 17:01:12 2019 -->
+<!-- CreationDate: Wed Sep 13 22:32:07 2023 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -58,8 +58,8 @@ page documents the <b>cwebp</b> command.</p>
 
 <p style="margin-left:11%; margin-top: 1em"><b>cwebp</b>
 compresses an image using the WebP format. Input format can
-be either PNG, JPEG, TIFF, WebP or raw Y&rsquo;CbCr
-samples.</p>
+be either PNG, JPEG, TIFF, WebP or raw Y&rsquo;CbCr samples.
+Note: Animated PNG and WebP files are not supported.</p>
 
 <h2>OPTIONS
 <a name="OPTIONS"></a>
@@ -191,15 +191,6 @@ can result in faster processing time at the expense of
 larger file size and lower compression quality.</p></td></tr>
 </table>
 
-<p style="margin-left:11%;"><b>-resize</b> <i>width
-height</i></p>
-
-<p style="margin-left:22%;">Resize the source to a
-rectangle with size <b>width</b> x <b>height</b>. If either
-(but not both) of the <b>width</b> or <b>height</b>
-parameters is 0, the value will be calculated preserving the
-aspect-ratio.</p>
-
 <p style="margin-left:11%;"><b>-crop</b> <i>x_position
 y_position width height</i></p>
 
@@ -207,7 +198,18 @@ y_position width height</i></p>
 with top-left corner at coordinates (<b>x_position</b>,
 <b>y_position</b>) and size <b>width</b> x <b>height</b>.
 This cropping area must be fully contained within the source
-rectangle.</p>
+rectangle. Note: the cropping is applied <i>before</i> any
+scaling.</p>
+
+<p style="margin-left:11%;"><b>-resize</b> <i>width
+height</i></p>
+
+<p style="margin-left:22%;">Resize the source to a
+rectangle with size <b>width</b> x <b>height</b>. If either
+(but not both) of the <b>width</b> or <b>height</b>
+parameters is 0, the value will be calculated preserving the
+aspect-ratio. Note: scaling is applied <i>after</i>
+cropping.</p>
 
 <table width="100%" border="0" rules="none" frame="void"
        cellspacing="0" cellpadding="0">
@@ -269,6 +271,16 @@ to use during the dichotomy used by options <b>-size</b> or
 <b>-size</b> or <b>-psnr</b> were used, but <b>-pass</b>
 wasn&rsquo;t specified, a default value of &rsquo;6&rsquo;
 passes will be used.</p>
+
+<p style="margin-left:11%;"><b>-qrange</b> <i>int
+int</i></p>
+
+<p style="margin-left:22%;">Specifies the permissible
+interval for the quality factor. This is particularly useful
+when using multi-pass (<b>-size</b> or <b>-psnr</b>
+options). Default is 0 100. If the quality factor is outside
+this range, it will be clamped. If the minimum value must be
+less or equal to the maximum one.</p>
 
 <table width="100%" border="0" rules="none" frame="void"
        cellspacing="0" cellpadding="0">
@@ -419,7 +431,7 @@ particular).</p> </td></tr>
 
 <p style="margin-left:22%;">Compute and report average SSIM
 (structural similarity metric, see
-http://en.wikipedia.org/wiki/SSIM for additional
+https://en.wikipedia.org/wiki/SSIM for additional
 details).</p>
 
 <p style="margin-left:11%;"><b>-print_lsim</b></p>
@@ -578,7 +590,7 @@ input format may not support all combinations.</p>
 all bugs to the issue tracker:
 https://bugs.chromium.org/p/webp <br>
 Patches welcome! See this page to get started:
-http://www.webmproject.org/code/contribute/submitting-patches/</p>
+https://www.webmproject.org/code/contribute/submitting-patches/</p>
 
 <h2>EXAMPLES
 <a name="EXAMPLES"></a>
@@ -616,8 +628,8 @@ page was written by Pascal Massimino
 
 <p style="margin-left:11%; margin-top: 1em"><b>dwebp</b>(1),
 <b>gif2webp</b>(1) <br>
-Please refer to http://developers.google.com/speed/webp/ for
-additional information.</p>
+Please refer to https://developers.google.com/speed/webp/
+for additional information.</p>
 <hr>
 </body>
 </html>
